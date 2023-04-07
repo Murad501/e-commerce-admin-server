@@ -145,8 +145,9 @@ const run = async () => {
     });
 
     //handle-checkout
-    app.post("/handle-checkout/", async (req, res) => {
+    app.post("/handle-checkout/:email", async (req, res) => {
       const { orders } = req.body;
+      const { email } = req.params;
       const query = { user: email };
       await cartCollections.deleteMany(query);
       const result = await orderCollections.insertMany(orders);
